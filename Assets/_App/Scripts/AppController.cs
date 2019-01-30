@@ -9,7 +9,7 @@ namespace NomuraKogei.Tsunagaling.RunningChecker
     {
         private AppSetting _setting;
 
-        System.Diagnostics.Process _process;
+        System.Diagnostics.Process _process = null;
 
         System.EventHandler _event;
 
@@ -84,8 +84,8 @@ namespace NomuraKogei.Tsunagaling.RunningChecker
         {
             _process = new System.Diagnostics.Process();
             _process.StartInfo.FileName = _setting.ProcessPath;
-            _process.Exited += _event;
             _process.EnableRaisingEvents = true;
+            _process.Exited += _event;
             _process.Start();
             _hasExitProcess = false;
             Debug.Log("[AppController] プロセス開始");
@@ -93,8 +93,8 @@ namespace NomuraKogei.Tsunagaling.RunningChecker
 
         private void ClearProcess()
         {
-            _process.Exited -= _event;
             _process.EnableRaisingEvents = false;
+            _process.Exited -= _event;
             _process.Close();
             _process.Dispose();
             _process = null;

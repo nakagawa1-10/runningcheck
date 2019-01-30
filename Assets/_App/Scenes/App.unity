@@ -282,7 +282,7 @@ MonoBehaviour:
   _logStringPrefab: {fileID: 2138862338}
   _logStringParent: {fileID: 876571955}
   _maxDisplayCount: 22
-  _outputLog: 0
+  _outputLog: 1
   _logDirPathInStreamingAssets: Log
 --- !u!1 &876571954
 GameObject:
