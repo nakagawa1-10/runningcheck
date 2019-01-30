@@ -13,6 +13,8 @@ namespace NomuraKogei.Tsunagaling.RunningChecker
 
         System.EventHandler _event;
 
+        private bool _hasExitProcess = false;
+
 
         //------------------------------------------------------------------
         #region MonoBehavior functions
@@ -34,7 +36,14 @@ namespace NomuraKogei.Tsunagaling.RunningChecker
         
         private void Update()
         {
+            // TODO:S : UniRxで書き直し
+            // Process終了値チェック
+            if (_hasExitProcess)
+            {
+                OnDetectProcessExit();
+            }
 
+            // TODO:S : UniRxで書き直し
             // コマンド
             // 終了
             if (Input.GetKeyUp(KeyCode.Escape))
@@ -59,11 +68,16 @@ namespace NomuraKogei.Tsunagaling.RunningChecker
         #endregion // MonoBehavior functions
 
 
-        private void OnExitProcess(object sender, System.EventArgs e)
+        private void OnDetectProcessExit()
         {
             Debug.Log("[AppController] プロセス終了");
             ClearProcess();
             StartProcess();
+        }
+
+        private void OnExitProcess(object sender, System.EventArgs e)
+        {
+            _hasExitProcess = true;
         }
 
         private void StartProcess()
@@ -73,6 +87,7 @@ namespace NomuraKogei.Tsunagaling.RunningChecker
             _process.Exited += _event;
             _process.EnableRaisingEvents = true;
             _process.Start();
+            _hasExitProcess = false;
             Debug.Log("[AppController] プロセス開始");
         }
 

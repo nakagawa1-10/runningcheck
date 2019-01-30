@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,16 @@ namespace Kosu.UnityLibrary
 
         [SerializeField]
         private RectTransform _logStringParent;
+
+        [SerializeField]
+        private int _maxDisplayCount = 8;
+
+        [SerializeField]
+        private bool _outputLog = false;
+
+        [SerializeField]
+        private string _logDirPathInStreamingAssets;
+
 
         private void OnEnable()
         {
@@ -48,16 +59,35 @@ namespace Kosu.UnityLibrary
                                  type.ToString(),
                                  System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
                                  logString);
+
+            if (_outputLog)
+            {
+                var planeLog = string.Format("[{0}][{1}] {2}",
+                                 type.ToString(),
+                                 System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                                 logString);
+                ExportLog(planeLog);
+            }
+
             var text = Instantiate(_logStringPrefab);
+            if (!text.gameObject.activeSelf) text.gameObject.SetActive(true);
             text.text = log;
             text.transform.SetParent(_logStringParent, false);
 
-            while (_logStringParent.childCount > 8)
+            while (_logStringParent.childCount > _maxDisplayCount)
             {
                 var child = _logStringParent.GetChild(0);
                 DestroyImmediate(child.gameObject);
             }
         }
 
+        private void ExportLog(string log)
+        {
+            if (!Directory.Exists(Application.streamingAssetsPath + "/" + _logDirPathInStreamingAssets)) return;
+
+            var filePath = Application.streamingAssetsPath + "/" + _logDirPathInStreamingAssets + "/" + System.DateTime.Now.ToString("yyyy_MM_dd") + ".txt";
+
+            File.AppendAllText(filePath, log + System.Environment.NewLine);
+        }
     }
 }

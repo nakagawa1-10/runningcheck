@@ -34,16 +34,4 @@ sysinfo.txt
 *.unitypackage
 
 # プロジェクト固有
-/Assets/StreamingAssets/AVProVideoSamples/
-/Assets/StreamingAssets/Video/
-/Assets/StreamingAssets/Debug/
-/Assets/_Sandbox/AvatorTest/
-.vscode/
-Assets/StreamingAssets/Images/
-Assets/StreamingAssets/RLT/
-Assets/StreamingAssets/AVT/
-Assets/Sound/
-Assets/_Sandbox/Avator/fbx/stage/stage_v011.fbx.meta
-Assets/_Sandbox/Avator/fbx/stage/stage_v011.fbx
-Assets/_Sandbox/Avator/fbx/
-Assets/Fonts/
+/Assets/StreamingAssets/Log/
