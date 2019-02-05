@@ -106,7 +106,7 @@ namespace NomuraKogei.Tsunagaling.RunningChecker
         {
             if (!_setting.EnableLogBackup)
             {
-                Debug.LogWarning("[AppController] Backup function is disabled.");
+                Debug.Log("[AppController] Backup function is disabled.");
                 return;
             }
 
