@@ -1,6 +1,7 @@
 ﻿using Kosu.UnityLibrary;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace NomuraKogei.Tsunagaling.RunningChecker
@@ -82,6 +83,7 @@ namespace NomuraKogei.Tsunagaling.RunningChecker
 
         private void StartProcess()
         {
+            BackupLog();
             _process = new System.Diagnostics.Process();
             _process.StartInfo.FileName = _setting.ProcessPath;
             _process.EnableRaisingEvents = true;
@@ -98,6 +100,29 @@ namespace NomuraKogei.Tsunagaling.RunningChecker
             _process.Close();
             _process.Dispose();
             _process = null;
+        }
+
+        private void BackupLog()
+        {
+            if (!_setting.EnableLogBackup)
+            {
+                Debug.LogWarning("[AppController] Backup function is disabled.");
+                return;
+            }
+
+            if (!File.Exists(_setting.UnityLogFilePath))
+            {
+                Debug.LogWarning("[AppController] Log file can't be found. (Path : " + _setting.UnityLogFilePath + ")");
+                return;
+            }
+
+            if (!Directory.Exists(_setting.LogBackupDirPath))
+            {
+                Directory.CreateDirectory(_setting.LogBackupDirPath);
+            }
+
+            var logFileName = System.DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".txt";
+            File.Copy(_setting.UnityLogFilePath, _setting.LogBackupDirPath + logFileName);
         }
     }
 }

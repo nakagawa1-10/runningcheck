@@ -1,4 +1,7 @@
 {
     "TargetFps":30,
-    "ProcessPath": "C:/Users/CyberBoccia/Documents/Tsunagaling/App/Debug/DisplayTest/HitomojiMonitor.exe"
+    "ProcessPath": "C:/Users/yuta/Desktop/projects/1811_NomuraKogei_Hitomoji/App/Debug/DisplayTest/DisplayPerformanceTest.exe",
+    "EnableLogBackup":true,
+    "UnityLogFilePath":"C:/Users/yuta/AppData/LocalLow/1-10/HitomojiMonitor/output_log.txt",
+    "LogBackupDirPath":"C:/Users/yuta/AppData/LocalLow/1-10/HitomojiMonitor/_Backup/"
 }
