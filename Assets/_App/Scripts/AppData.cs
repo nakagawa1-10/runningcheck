@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NomuraKogei.Tsunagaling.RunningChecker
+namespace RunningChecker
 {
     public class AppSetting
     {
@@ -11,6 +11,8 @@ namespace NomuraKogei.Tsunagaling.RunningChecker
         public int TargetFps;
 
         public string ProcessPath;
+
+        public string ProcessArgs;
 
         public bool EnableLogBackup;
 
@@ -22,6 +24,7 @@ namespace NomuraKogei.Tsunagaling.RunningChecker
         {
             TargetFps = 30;
             ProcessPath = string.Empty;
+            ProcessArgs = string.Empty;
             EnableLogBackup = true;
             UnityLogFilePath = string.Empty;
             LogBackupDirPath = string.Empty;

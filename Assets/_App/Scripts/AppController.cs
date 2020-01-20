@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-namespace NomuraKogei.Tsunagaling.RunningChecker
+namespace RunningChecker
 {
     public class AppController : MonoBehaviour
     {
@@ -71,7 +71,7 @@ namespace NomuraKogei.Tsunagaling.RunningChecker
 
         private void OnDetectProcessExit()
         {
-            Debug.Log("[AppController] プロセス終了");
+            Debug.Log("[AppController] Process end.");
             ClearProcess();
             StartProcess();
         }
@@ -86,11 +86,12 @@ namespace NomuraKogei.Tsunagaling.RunningChecker
             BackupLog();
             _process = new System.Diagnostics.Process();
             _process.StartInfo.FileName = _setting.ProcessPath;
+            _process.StartInfo.Arguments = _setting.ProcessArgs;
             _process.EnableRaisingEvents = true;
             _process.Exited += _event;
             _process.Start();
             _hasExitProcess = false;
-            Debug.Log("[AppController] プロセス開始");
+            Debug.Log("[AppController] Process started.");
         }
 
         private void ClearProcess()
